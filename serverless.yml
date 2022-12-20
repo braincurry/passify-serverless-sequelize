@@ -1,0 +1,41 @@
+service: passify-be
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage,'local'}
+  region: eu-central-1
+  memorySize: 1024
+  timeout: 20
+
+  environment:
+    DB_DIALECT: postgres
+    DB_URI: postgresql://localhost:5432
+    DB_USERNAME: postgres
+    DB_HOST: localhost
+    DB_NAME: postgres
+    DB_PASSWORD: 6363
+    DB_PORT: 5432
+
+custom:
+  migrationsPath: "./src/migrations/"
+
+functions:
+  getHandler:
+    handler: src/handler/handler.getHandler
+    events:
+      - httpApi:
+          path: /
+          method: GET
+
+  postHandler:
+    handler: src/handler/handler.postHandler
+    events:
+      - httpApi:
+          path: /
+          method: POST
+
+plugins:
+  - serverless-offline
+  - serverless-sequelize-migrations
