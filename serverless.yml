@@ -17,24 +17,19 @@ provider:
     DB_NAME: postgres
     DB_PASSWORD: 6363
     DB_PORT: 5432
+    JWT_SECRET: daskjfsdavalruajk
 
 custom:
   migrationsPath: "./src/migrations/"
 
 functions:
-  getHandler:
-    handler: src/handler/handler.getHandler
+  authHandler:
+    handler: src/handler/authHandler.authHandler
     events:
-      - httpApi:
-          path: /
-          method: GET
-
-  postHandler:
-    handler: src/handler/handler.postHandler
-    events:
-      - httpApi:
-          path: /
+      - http:
+          path: /auth/{method}
           method: POST
+          cors: true
 
 plugins:
   - serverless-offline

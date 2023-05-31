@@ -2,15 +2,26 @@ const { DataTypes } = require("sequelize");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    console.log(`-- inside create table: post`);
+    console.log(`-- inside create table: user`);
     try {
-      return await queryInterface.createTable("post", {
+      return await queryInterface.createTable("user", {
         id: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
         },
-        title: {
+        first_name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        last_name: {
+          type: DataTypes.STRING,
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        password: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -26,16 +37,16 @@ module.exports = {
         },
       });
     } catch (e) {
-      console.log(`Error in creating table: post`, err);
+      console.log(`Error in creating table: user`, err);
     }
   },
 
   down: async (queryInterface) => {
-    console.log(`-- inside down drop table: post`);
+    console.log(`-- inside down drop table: user`);
     try {
-      await queryInterface.dropTable("post");
+      await queryInterface.dropTable("user");
     } catch (err) {
-      console.log(`Error in dropping table: post`, err);
+      console.log(`Error in dropping table: user`, err);
     }
   },
 };

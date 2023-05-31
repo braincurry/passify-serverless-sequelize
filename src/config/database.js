@@ -1,10 +1,10 @@
 module.exports = {
   local: {
     uri: process.env.DB_URI,
-    username: process.env.DB_USERNAME,
+    username: "postgres",
     host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
+    database: "demo",
+    password: "6363",
     port: process.env.DB_PORT,
     schema: "public",
     searchPath: "public",
